@@ -58,7 +58,9 @@ for(g in 1:Ngroup) {
     L[a+1,g]= Linf[g]*(1-exp(-k[g])) + (L[a,g])*exp(-k[g]) #length at age
     W[a,g]=  c[g]*L[a,g]^b[g] #weight at age
  
-       
+       #MATURITY
+       pmat[a,g]=1/(1+)
+         
              #FISHERY SELECTIVITY
          if(slot == "YES")    {
              #SLOT:
@@ -75,7 +77,7 @@ for(g in 1:Ngroup) {
 }#next group
 
    #     
-    	eggs <- 63*W[, 1]  #estimate of mass-specific egg production (in grams) from King and Winter 2005     
+    	eggs <- 62.824e-04*W[, 1]^3.0011  #estimate of mass-specific egg production (in grams) from King and Winter 2005     
  
 
 

@@ -2,16 +2,16 @@ library(ggplot2)
 library(reshape2)
   #rm(list=ls(all=TRUE))
 
- mu_f = matrix(nrow=10, ncol=3, data=rep(seq(0, 0.7, by=0.1), 3)) #make a vector of total mortality from 0 to 0.9 for each life-history type
-  #mu_f = matrix(nrow=10, ncol=3, data=0.3)
+# mu_f = matrix(nrow=10, ncol=3, data=rep(seq(0, 0.7, by=0.1), 3)) #make a vector of total mortality from 0 to 0.9 for each life-history type
+  mu_f = matrix(nrow=10, ncol=3, data=0.3)
  
-
-slot = "YES" 
+ 
+slot = "NO" 
 feedback = "NO"
 
- source('wrasse parameters.R', chdir = TRUE)
- # source('lingcod parameters.R', chdir = TRUE)
- 
+ #source('wrasse parameters.R', chdir = TRUE)
+ source('lingcod parameters.R', chdir = TRUE)
+  
 #################################################################################################################
 #For every level of fishing pressure (0-0.9): 
 ###Simulate population dynamics, start from an arbitrary population size and let the population reach a stable age distribution, then start fishing. The population will reach a new, fished, steady state (stable age dist). *Note:  recruitment is based only on Female abundance, and assuming 50:50 offspring sex ratio.

@@ -9,7 +9,7 @@ Amax <- c(20, 14) #max age across all groups
 
 initialsize = c(35, 34) #cm size at "recruitment" 
 
-Linf = c(112.8,112.8)  #cm, average max size at maturity for use in von Bert growth function (VBGF)
+Linf = c(112.8,81.7)  #cm, average max size at maturity for use in von Bert growth function (VBGF)
 k = c(0.145, 0.223)   # VBGF growth coefficients 
 c = c(0.0017,0.0040) #mass-at-size coef (in kilograms)   
 b = c(3.40, 3.21)   #mass-at-size exp 
@@ -18,7 +18,7 @@ prop=c(0.5, 0.5) #initial proportions of each strategy at recruitment
 
 #assuming Beverton Holt recruitment, these are general parameters I adjusted by eye
 alpha = 0.1 
-beta = 0.0000001
+beta = 0.00001
 
 natmort = c(0.18, 0.32) #mortality of each group, from PFMC stock assessment
 
@@ -63,12 +63,12 @@ for(g in 1:Ngroup) {
       W[a,g]=  c[g]*L[a,g]^b[g] #weight at age
       
       ##AGE DEPENDENT MATURATION
-      pmat[a,g] <- 1/(1+exp(-matalpha[g]*(a-matbeta[g])))
+      pmat[a,,g] <- 1/(1+exp(-matalpha[g]*(a-matbeta[g])))
       
       #FISHERY SELECTIVITY
       if(slot == "YES")    {
         #SLOT:
-        if (L[a, g] > 66.04 & L[a,g] < 91.44 )  select[a,g] = 1 else select[a,g] = 0  # Slot between 120 and 170 mm based on Length-at-age
+        if (L[a, g] > 66.04 & L[a,g] < 91.44 )  select[a,g] = 1 else select[a,g] = 0  # Slot between 26 and 36 inches based on Length-at-age
       } else {
         # # MINIMUM SIZE: 
         if (L[a, g] > 66.04 )  select[a,g] = 1 else select[a,g] = 0  #Minimum size at 66 cm

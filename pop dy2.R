@@ -6,11 +6,11 @@ mu_f = seq(0, 0.7, by=0.1)  #make a vector of total mortality from 0 to 0.7    #
 # quartz()
   # par(mfrow=c(2,2))
  
-slot = "NO" 
+slot = "YES" 
 feedback = "NO"
 
- source('~/Documents/slot_limits/wrasse parameters.R', chdir = TRUE)
- #source('~/Documents/slot_limits/lingcod parameters.R', chdir = TRUE)
+ #source('~/Documents/slot_limits/wrasse parameters.R', chdir = TRUE)
+ source('~/Documents/slot_limits/lingcod parameters.R', chdir = TRUE)
   
 #################################################################################################################
 #For every level of fishing pressure (0-0.7): 
@@ -37,7 +37,8 @@ for(t in 1:(Tmax-1)) {
 	
       E[t]=sum(N[, t,1]*pmat[,t,1]*eggs, na.rm=TRUE) #assuming spawning occurs between 1 t and the next and depends ONLY on mature females
       
-      NM_length[t]  = mean((N[, t, 2]*L[-c(Amax[3]),2] *pmat[, t, 2])   / sum(N[, t, 2]),na.rm=TRUE ) 
+      #NM_length[t]  = mean((N[, t, 2]*L[-c(Amax[3]),2] *pmat[, t, 2])   / sum(N[, t, 2]),na.rm=TRUE ) 
+      NM_length[t]  = mean((N[, t, 2]*L[-c(Amax[2]),2] *pmat[, t, 2])   / sum(N[, t, 2]),na.rm=TRUE ) 
       
       Nests[t]=100*(NM_length[t])^1.25
       
@@ -89,33 +90,33 @@ Yield[fish] = sum(N[,Tfishing+10,]*(1-exp(-Fishing[,])))
 
 
   
-##Plot these relationships
-   # #Age-length
- 
- matplot(L[-(Amax+1), ], type="l", lwd=2, las=1, ylab ="Length", xlab = "Age", col=c('black','blue', 'red'), lty=1, 
-       ylim=c(min(L[,3]), max(L[,2])), xlim=c(0, Amax[3]))
- # #       
-       # matplot(L[-(Amax+1), ], type="l", lwd=2, las=1, ylab ="Length", xlab = "Age", col=c('black','blue'), lty=1,
-      # ylim=c(min(L[,1]), max(L[,1])), xlim=c(0, Amax[1]))
-
-  # # ###for wrasse  & bluegill
- legend('bottomright', legend=c('Female','Territorial Male', 'Sneaker Male'),  lty=1, col=c('black','blue', 'red'), cex=0.65)
-
- # # ###for lingcod
- # legend('bottomright', legend=c('Female','Territorial Male'),  lty=1, col=c('black','blue'), cex=0.65)
-
-
-# # #Maturation ogives
- 
- matplot(pmat[,10,], type="l", lwd=2, las=1, lty=1, col=c('black','blue', 'red'),  ylab ="Probability Mature", xlab = "Age",
-      ylim=c(0, 1), xlim=c(0, max(Amax)))
-# ##mat ogive for lingcod
-# matplot(pmat[,10,], type="l", lwd=2, las=1, lty=1, col=c('black','blue' ),  ylab ="Probability Mature", xlab = "Age",
-      # ylim=c(0, 1), xlim=c(0, max(Amax)))
-
-  legend('bottomright', legend=c('Female','Territorial Male', 'Sneaker Male'),  lty=1, col=c('black','blue', 'red'), cex=0.65) 
-        
-# plot(eggs, type="l", lwd=2, lty=1, col='black', las=1, ylab="", xlab="Age")  
+# ##Plot these relationships
+#    # #Age-length
+#  
+#  matplot(L[-(Amax+1), ], type="l", lwd=2, las=1, ylab ="Length", xlab = "Age", col=c('black','blue', 'red'), lty=1, 
+#        ylim=c(min(L[,3]), max(L[,2])), xlim=c(0, Amax[3]))
+#  # #       
+#        # matplot(L[-(Amax+1), ], type="l", lwd=2, las=1, ylab ="Length", xlab = "Age", col=c('black','blue'), lty=1,
+#       # ylim=c(min(L[,1]), max(L[,1])), xlim=c(0, Amax[1]))
+# 
+#   # # ###for wrasse  & bluegill
+#  legend('bottomright', legend=c('Female','Territorial Male', 'Sneaker Male'),  lty=1, col=c('black','blue', 'red'), cex=0.65)
+# 
+#  # # ###for lingcod
+#  # legend('bottomright', legend=c('Female','Territorial Male'),  lty=1, col=c('black','blue'), cex=0.65)
+# 
+# 
+# # # #Maturation ogives
+#  
+#  matplot(pmat[,10,], type="l", lwd=2, las=1, lty=1, col=c('black','blue', 'red'),  ylab ="Probability Mature", xlab = "Age",
+#       ylim=c(0, 1), xlim=c(0, max(Amax)))
+# # ##mat ogive for lingcod
+# # matplot(pmat[,10,], type="l", lwd=2, las=1, lty=1, col=c('black','blue' ),  ylab ="Probability Mature", xlab = "Age",
+#       # ylim=c(0, 1), xlim=c(0, max(Amax)))
+# 
+#   legend('bottomright', legend=c('Female','Territorial Male', 'Sneaker Male'),  lty=1, col=c('black','blue', 'red'), cex=0.65) 
+#         
+# # plot(eggs, type="l", lwd=2, lty=1, col='black', las=1, ylab="", xlab="Age")  
 # matplot((select), type="l", lwd=2, lty=3, col=c('black','blue', "red"),las=1, ylab ="Selectivity", xlab ="Age",  ylim=c(0,1), xlim=c(0,  max(Amax)))
   
   
@@ -171,21 +172,22 @@ Yield[fish] = sum(N[,Tfishing+10,]*(1-exp(-Fishing[,])))
 fishing=seq(0,0.7,0.1)
    
  quartz()
-par(mar=c(5,5,4,6)+0.1)
-barplot(Yield, names.arg=fishing, ylab="Yield  (numbers)", xlab="Fishing mortality", las=1, ylim=c(0, 3000))
+par(mar=c(5,5,4,6)+0.1) 
+    barplot(Yield, names.arg=fishing, ylab="Yield  (numbers)", xlab="Fishing mortality", las=1, ylim=c(0, 3000))
+#  par(new=T, par(mar=c(5,5,4,6)+0.1))
+plot(fishing, SPR, ylab="",  xlab="Fishing mortality", las=1, 
+ylim=c(0, 1), type="b", pch=15, col="blue", lty=2)
+  
  par(new=T, par(mar=c(5,5,4,6)+0.1))
-plot(SPR, ylab="", xlab="", ylim=c(0, 1), type="b", pch=15, col="blue", lty=2, xaxt="n",yaxt="n")
- 
- axis(4, labels=seq(0.1,1,0.1), at= seq(0.1,1,0.1), col="blue", col.axis="blue", las=1)
- par(new=T, par(mar=c(5,5,4,6)+0.1))
-plot(Care, ylab="", xlab="", ylim=c(0, 20), type="b", pch=20, col="red", lty=2, xaxt="n",yaxt="n")
+#plot(Care, ylab="", xlab="", ylim=c(0, 1), type="b", pch=20, col="red", lty=2, xaxt="n",yaxt="n")
+plot(Care, ylab="", xlab="", ylim=c(0, 20),  type="b", pch=20, col="red", lty=2, xaxt="n",yaxt="n")
+axis(4,line=0,labels=seq(0, 25, 5), at=seq(0, 25, 5), col="red",col.axis="red", las=1)
 
- #axis(4,line=3,  labels=seq(0.1,1,0.1), at= seq(0.1,1,0.1), col="red",col.axis="red", las=1)
- 
- mtext("Spawning Potential Ratio",side=4,line=4, col="blue")
- #mtext("NM:SN ratio", side=4, line=4, col="red")
- mtext("Care capacity", side = 4, line = 5, col="red" )
- 
+ #axis(4,line=3,  
+  mtext("Spawning Potential Ratio",side=2,line=3, col="blue")
+ # #mtext("NM:SN ratio", side=4, line=4, col="red")
+  mtext("Care capacity", side = 4, line = 2, col="red" )
+ # 
  Care
  
  # par(new=T, par(mar=c(5,5,4,6)+0.1))  
@@ -212,17 +214,16 @@ plot(Care, ylab="", xlab="", ylim=c(0, 20), type="b", pch=20, col="red", lty=2, 
    # g3+theme(legend.position="none")
       
   # # ####if min size yield and MR are saved
-  # if (slot == "NO") {
-   # minsizeY <- Yield
+    if (slot == "NO") {
+   minsizeY <- Yield
   # minsizeMR <- Maleratio
    # minsizeSPR <- SPR
    
-   # }
+    }
    
-   # deltaY <- (minsizeY-Yield)/minsizeY
-   
-       # plot(fishing[-1], deltaY[-1]*100, type="b", pch=15, ylab="% change  with slot", las=1, xlab="Fishing Mortality", ylim=c(0, 100))
-        
+    deltaY <- (minsizeY-Yield)/minsizeY
+        plot(fishing[-1], deltaY[-1]*100, type="b", pch=15, ylab="% change  with slot", las=1, xlab="Fishing Mortality", ylim=c(0, 100))
+
        # for lingcod
        # deltaSPR <- (SPR - minsizeSPR)/minsizeSPR
      # lines(fishing[-1], deltaSPR[-1]*100, type="l", col=4, lwd=2.5)  
@@ -232,11 +233,11 @@ plot(Care, ylab="", xlab="", ylim=c(0, 20), type="b", pch=20, col="red", lty=2, 
 
 
 # ###if slotNMdepletion and slotSNdepletion are saved
-if(slot =="YES") {
-	slotSN <- SNdepletion
-	slotNM <- NMdepletion
-	
-}
+# if(slot =="YES") {
+# 	slotSN <- SNdepletion
+# 	slotNM <- NMdepletion
+# 	
+# }
 
 
 # #    malefreq = rbind(SNdepletion,slotSN, NMdepletion,  slotNM)/max(slotSN)

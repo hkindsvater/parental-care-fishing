@@ -6,11 +6,11 @@ mu_f = seq(0, 0.7, by=0.1)  #make a vector of total mortality from 0 to 0.7    #
 # quartz()
   # par(mfrow=c(2,2))
  
-slot = "YES" 
+slot = "NO" 
 feedback = "NO"
 
- #source('~/Documents/slot_limits/wrasse parameters.R', chdir = TRUE)
- source('~/Documents/slot_limits/lingcod parameters.R', chdir = TRUE)
+ source('~/Documents/slot_limits/wrasse parameters.R', chdir = TRUE)
+ # source('~/Documents/slot_limits/lingcod parameters.R', chdir = TRUE)
   
 #################################################################################################################
 #For every level of fishing pressure (0-0.7): 
@@ -173,7 +173,7 @@ fishing=seq(0,0.7,0.1)
    
  quartz()
 par(mar=c(5,5,4,6)+0.1) 
-    barplot(Yield, names.arg=fishing, ylab="Yield  (numbers)", xlab="Fishing mortality", las=1, ylim=c(0, 3000))
+    barplot(Yield, names.arg=fishing, ylab="Yield  (numbers)", xlab="Fishing mortality", las=1, )
 #  par(new=T, par(mar=c(5,5,4,6)+0.1))
 plot(fishing, SPR, ylab="",  xlab="Fishing mortality", las=1, 
 ylim=c(0, 1), type="b", pch=15, col="blue", lty=2)

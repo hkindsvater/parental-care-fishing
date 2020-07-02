@@ -8,7 +8,7 @@ Kindsvater, Halvorsen, Sordalen, and Alonzo (2020) The consequences of size-sele
 
 MIT License
 
-Copyright (c) 2020 Holl yKindsvater
+Copyright (c) 2020 Holly Kindsvater
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

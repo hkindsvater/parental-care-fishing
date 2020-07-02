@@ -6,11 +6,11 @@ mu_f = seq(0, 0.7, by=0.1)  #make a vector of total mortality from 0 to 0.7    #
 # quartz()
   # par(mfrow=c(2,2))
  
-slot = "NO" 
-feedback = "NO"
+slot = "YES" 
+feedback = "YES"
 
  source('~/Documents/slot_limits/wrasse parameters.R', chdir = TRUE)
- # source('~/Documents/slot_limits/lingcod parameters.R', chdir = TRUE)
+ #source('~/Documents/slot_limits/lingcod parameters.R', chdir = TRUE)
   
 #################################################################################################################
 #For every level of fishing pressure (0-0.7): 
@@ -73,7 +73,7 @@ for(t in 1:(Tmax-1)) {
   } #next group
 } #end t loop
 
-  	B_B0[fish] = sum(N[,Tfishing+10,]*W[a,])/ sum(N[,Tfishing+10,]*W[a, ])
+  	B_B0[fish] = sum(N[,Tfishing+10,]*W[,], na.rm=TRUE)/ sum(N[,Tfishing-10,]*W[, ], na.rm=TRUE)
 
 SPR[fish] = P[Tfishing+10]/P[Tfishing-1]
 
@@ -86,7 +86,9 @@ Yield[fish] = sum(N[,Tfishing+10,]*(1-exp(-Fishing[,])))
  Femaledep[fish] = sum(N[, Tfishing+10, 1]) 
 } #end fish loop
 
-  Care2 = ifelse(Care >= 2, 2, Care)
+  Care2 = 2*Care/(1+Care)
+  
+  if(feedback=="NO") SPRnf <- SPR
   
 # ##Plot these relationships
 #    # #Age-length
@@ -170,21 +172,28 @@ Yield[fish] = sum(N[,Tfishing+10,]*(1-exp(-Fishing[,])))
 fishing=seq(0,0.7,0.1)
    
  quartz()
-par(mar=c(5,5,4,6)+0.1) 
-    barplot(Yield, names.arg=fishing, ylab="Yield  (numbers)", xlab="Fishing mortality", las=1, )
+  par(mar=c(6,6,6,6)+0.1) 
+#     barplot(Yield, names.arg=fishing, ylab="Yield  (numbers)", xlab="Fishing mortality", las=1  )
+#     
 #  par(new=T, par(mar=c(5,5,4,6)+0.1))
-#plot(fishing, SPR, ylab="",  xlab="Fishing mortality", las=1, ylim=c(0, 1), type="b", pch=15, col="blue", lty=2)
-plot(fishing, B_B0, ylab="",  xlab="Fishing mortality", las=1, 
-     ylim=c(0, 1), type="b", pch=15, col="blue", lty=2)
- par(new=T, par(mar=c(5,5,4,6)+0.1))
-#plot(Care, ylab="", xlab="", ylim=c(0, 1), type="b", pch=20, col="red", lty=2, xaxt="n",yaxt="n")
-plot(Care, ylab="", xlab="", ylim=c(0, 20),  type="b", pch=20, col="red", lty=2, xaxt="n",yaxt="n")
-axis(4,line=0,labels=seq(0, 25, 5), at=seq(0, 25, 5), col="red",col.axis="red", las=1)
+ plot(fishing, SPR, ylab="",  xlab="Fishing mortality",   ylim=c(0, 1), type="b", pch=15, col="purple", lty=2, las=1)
+#plot(fishing, B_B0, ylab="Biomass",  xlab="Fishing mortality", las=1, 
+     #ylim=c(0, 1), type="b", pch=15, col="blue", lty=2)
+ par(new=T, par(mar=c(6,6,6,6)+0.1))
+ plot(SPRnf, ylab="", xlab="", ylim=c(0, 1), type="b", pch=16, col="blue", lty=2, xaxt="n",yaxt="n")
+ par(new=T, par(mar=c(6,6,6,6)+0.1))
+ plot(Care, ylab="", xlab="", ylim=c(0, 1), type="b", pch=20, col="red", lty=2, xaxt="n",yaxt="n")
+ 
+ 
+ #Care function for lingcod
+ #plot(Care2, ylab="", xlab="", ylim=c(0, 2.2),  type="b", pch=20, col="red", lty=2, xaxt="n",yaxt="n")
 
- #axis(4,line=3,  
+#axis(4,line=0,labels=seq(0, 2.2, 0.4), at=seq(0, 2.2, 0.4), col="red",col.axis="red", las=1)
+axis(4,line=0,labels=seq(0, 1, 0.2), at=seq(0, 1, 0.2), col="red",col.axis="red", las=1)
+
   mtext("Spawning Potential Ratio",side=2,line=3, col="blue")
-  
-  mtext("Care capacity", side = 4, line = 2, col="red" )
+  mtext("Spawning Potential Ratio with feedback",side=2,line=4, col="purple")
+  mtext("Care capacity", side = 4, line = 3, col="red" )
  # 
  Care
  
@@ -212,15 +221,23 @@ axis(4,line=0,labels=seq(0, 25, 5), at=seq(0, 25, 5), col="red",col.axis="red", 
    # g3+theme(legend.position="none")
       
   # # ####if min size yield and MR are saved
-    if (slot == "NO") {
-   minsizeY <- Yield
+    if(slot == "NO") minsizeY <- Yield
+   
+ if(feedback=="NO") Care2nf <- Care2 
  
-   
-    }
-   
+ 
+# quartz()
+ 
         deltaY <- (minsizeY-Yield)/minsizeY
-        plot(fishing[-1], deltaY[-1]*100, type="b", pch=15, ylab="% change  with slot", las=1, xlab="Fishing Mortality", ylim=c(0, 100))
-
+        plot(fishing[-1], deltaY[-1]*100, type="b", pch=15, ylab="% change  with slot", las=1, xlab="Fishing Mortality", ylim=c(0, 30))
+       
+       #  quartz()
+         
+         Ymat<-cbind(minsizeY, Yield)
+         
+        # par(mar=c(5,5,4,6)+0.1) 
+        # barplot(t(Ymat), names.arg=fishing, beside=T, ylab="Yield  (numbers)", xlab="Fishing mortality", las=1, ylim=c(0, 2000), legend.text = c("Min Size Limit", "Slot Limit"), args.legend = list(x = "topleft", bty="n") )
+        # 
        # for lingcod
        # deltaSPR <- (SPR - minsizeSPR)/minsizeSPR
      # lines(fishing[-1], deltaSPR[-1]*100, type="l", col=4, lwd=2.5)  

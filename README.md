@@ -1,7 +1,6 @@
  
 # Code and materials for Kindsvater et al 2020
-[![DOI](https://zenodo.org/badge/186898786.svg)](https://zenodo.org/badge/latestdoi/186898786)
-
+ 
  
 
 Data and software for analyses of the corkwing wrasse and lingcode fishery simulations published in 

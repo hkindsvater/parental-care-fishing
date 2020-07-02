@@ -73,11 +73,7 @@ for(t in 1:(Tmax-1)) {
   } #next group
 } #end t loop
 
-<<<<<<< HEAD:pop_model.R
   	B_B0[fish] = sum(N[,Tfishing+10,]*W[,], na.rm=TRUE)/ sum(N[,Tfishing-10,]*W[, ], na.rm=TRUE)
-=======
-  	B_B0[fish] = sum(N[,Tfishing+10,]*W[a,])/ sum(N[,Tfishing+10,]*W[a, ])
->>>>>>> 97c8f8a5b79eb1ca6b16b200a18573450b894e0a:pop dy2.R
 
 SPR[fish] = P[Tfishing+10]/P[Tfishing-1]
 
@@ -90,13 +86,9 @@ Yield[fish] = sum(N[,Tfishing+10,]*(1-exp(-Fishing[,])))
  Femaledep[fish] = sum(N[, Tfishing+10, 1]) 
 } #end fish loop
 
-<<<<<<< HEAD:pop_model.R
   Care2 = 2*Care/(1+Care)
   
   if(feedback=="NO") SPRnf <- SPR
-=======
-  Care2 = ifelse(Care >= 2, 2, Care)
->>>>>>> 97c8f8a5b79eb1ca6b16b200a18573450b894e0a:pop dy2.R
   
 # ##Plot these relationships
 #    # #Age-length
@@ -184,7 +176,6 @@ fishing=seq(0,0.7,0.1)
 #     barplot(Yield, names.arg=fishing, ylab="Yield  (numbers)", xlab="Fishing mortality", las=1  )
 #     
 #  par(new=T, par(mar=c(5,5,4,6)+0.1))
-<<<<<<< HEAD:pop_model.R
  plot(fishing, SPR, ylab="",  xlab="Fishing mortality",   ylim=c(0, 1), type="b", pch=15, col="purple", lty=2, las=1)
 #plot(fishing, B_B0, ylab="Biomass",  xlab="Fishing mortality", las=1, 
      #ylim=c(0, 1), type="b", pch=15, col="blue", lty=2)
@@ -199,24 +190,10 @@ fishing=seq(0,0.7,0.1)
 
 #axis(4,line=0,labels=seq(0, 2.2, 0.4), at=seq(0, 2.2, 0.4), col="red",col.axis="red", las=1)
 axis(4,line=0,labels=seq(0, 1, 0.2), at=seq(0, 1, 0.2), col="red",col.axis="red", las=1)
-=======
-#plot(fishing, SPR, ylab="",  xlab="Fishing mortality", las=1, ylim=c(0, 1), type="b", pch=15, col="blue", lty=2)
-plot(fishing, B_B0, ylab="",  xlab="Fishing mortality", las=1, 
-     ylim=c(0, 1), type="b", pch=15, col="blue", lty=2)
- par(new=T, par(mar=c(5,5,4,6)+0.1))
-#plot(Care, ylab="", xlab="", ylim=c(0, 1), type="b", pch=20, col="red", lty=2, xaxt="n",yaxt="n")
-plot(Care, ylab="", xlab="", ylim=c(0, 20),  type="b", pch=20, col="red", lty=2, xaxt="n",yaxt="n")
-axis(4,line=0,labels=seq(0, 25, 5), at=seq(0, 25, 5), col="red",col.axis="red", las=1)
->>>>>>> 97c8f8a5b79eb1ca6b16b200a18573450b894e0a:pop dy2.R
 
   mtext("Spawning Potential Ratio",side=2,line=3, col="blue")
-<<<<<<< HEAD:pop_model.R
   mtext("Spawning Potential Ratio with feedback",side=2,line=4, col="purple")
   mtext("Care capacity", side = 4, line = 3, col="red" )
-=======
-  
-  mtext("Care capacity", side = 4, line = 2, col="red" )
->>>>>>> 97c8f8a5b79eb1ca6b16b200a18573450b894e0a:pop dy2.R
  # 
  Care
  
@@ -244,7 +221,6 @@ axis(4,line=0,labels=seq(0, 25, 5), at=seq(0, 25, 5), col="red",col.axis="red", 
    # g3+theme(legend.position="none")
       
   # # ####if min size yield and MR are saved
-<<<<<<< HEAD:pop_model.R
     if(slot == "NO") minsizeY <- Yield
    
  if(feedback=="NO") Care2nf <- Care2 
@@ -262,17 +238,6 @@ axis(4,line=0,labels=seq(0, 25, 5), at=seq(0, 25, 5), col="red",col.axis="red", 
         # par(mar=c(5,5,4,6)+0.1) 
         # barplot(t(Ymat), names.arg=fishing, beside=T, ylab="Yield  (numbers)", xlab="Fishing mortality", las=1, ylim=c(0, 2000), legend.text = c("Min Size Limit", "Slot Limit"), args.legend = list(x = "topleft", bty="n") )
         # 
-=======
-    if (slot == "NO") {
-   minsizeY <- Yield
- 
-   
-    }
-   
-        deltaY <- (minsizeY-Yield)/minsizeY
-        plot(fishing[-1], deltaY[-1]*100, type="b", pch=15, ylab="% change  with slot", las=1, xlab="Fishing Mortality", ylim=c(0, 100))
-
->>>>>>> 97c8f8a5b79eb1ca6b16b200a18573450b894e0a:pop dy2.R
        # for lingcod
        # deltaSPR <- (SPR - minsizeSPR)/minsizeSPR
      # lines(fishing[-1], deltaSPR[-1]*100, type="l", col=4, lwd=2.5)  

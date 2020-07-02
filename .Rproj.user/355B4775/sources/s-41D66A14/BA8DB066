@@ -3,22 +3,22 @@
     "path": "~/Documents/slot_limits/pop_model.R",
     "project_path": "pop_model.R",
     "type": "r_source",
-    "hash": "1390421647",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1593713008252.0,
     "source_on_save": false,
     "relative_order": 1,
     "properties": {
-        "cursorPosition": "108,24",
+        "cursorPosition": "108,2",
         "scrollLine": "83"
     },
     "folds": "",
-    "lastKnownWriteTime": 1593713028,
+    "lastKnownWriteTime": 1593713228,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1593713028616,
+    "last_content_update": 1593713228,
     "read_only": false,
     "read_only_alternatives": []
 }

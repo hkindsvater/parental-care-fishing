@@ -1,0 +1,24 @@
+{
+    "id": "BA8DB066",
+    "path": "~/Documents/slot_limits/pop_model.R",
+    "project_path": "pop_model.R",
+    "type": "r_source",
+    "hash": "1390421647",
+    "contents": "",
+    "dirty": false,
+    "created": 1593713008252.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "cursorPosition": "108,24",
+        "scrollLine": "83"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1593713028,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1593713028616,
+    "read_only": false,
+    "read_only_alternatives": []
+}
